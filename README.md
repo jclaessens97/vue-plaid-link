@@ -42,7 +42,7 @@ This is the preferred approach for integrating with Plaid Link in Vue.
 
 ### Available Link configuration options
 
-ℹ️ See [src/types/index.ts][types] for exported types.
+ℹ️ See (src/types/index.ts)[https://github.com/jclaessens97/vue-plaid-link/blob/c9e45fead47649c16c5ca9ca74bd22bee1ccabd9/src/types/index.ts] for exported types.
 
 Please refer to the [official Plaid Link
 docs](https://plaid.com/docs/link/web/) for a more holistic understanding of
@@ -54,11 +54,11 @@ the various Link options and the
 | key                   | type                                                                                      |
 | --------------------- | ----------------------------------------------------------------------------------------- |
 | `token`               | `string \| null`                                                                          |
+| `receivedRedirectUri` | `string \| undefined`                                                             |
 | `onSuccess`           | `(public_token: string, metadata: PlaidLinkOnSuccessMetadata) => void`                    |
-| `onExit`              | `(error: null \| PlaidLinkError, metadata: PlaidLinkOnExitMetadata) => void`              |
+| `onExit`              | `(error: PlaidLinkError \| null, metadata: PlaidLinkOnExitMetadata) => void`              |
 | `onEvent`             | `(eventName: PlaidLinkStableEvent \| string, metadata: PlaidLinkOnEventMetadata) => void` |
 | `onLoad`              | `() => void`                                                                              |
-| `receivedRedirectUri` | `string \| null \| undefined`                                                             |
 
 #### `usePlaidLink` return value
 
@@ -71,7 +71,7 @@ the various Link options and the
 
 ## Using the pre-built component instead of the usePlaidLink composable
 
-If you cannot use Vue composables for legacy reasons, you can use the `PlaidLink` component.
+If you cannot use Vue composables for some reason, you can use the `PlaidLink` component.
 
 ℹ️ See full source code example at [examples/component.vue](examples/component.vue)
 
