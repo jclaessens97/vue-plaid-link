@@ -1,0 +1,38 @@
+{
+  "name": "@jcss/vue-plaid-link",
+  "type": "module",
+  "version": "1.0.0",
+  "exports": {
+    ".": {
+      "import": "./dist/jcss-vue-plaid-link.js",
+      "require": "./dist/jcss-vue-plaid-link.umd.cjs"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && vue-tsc --emitDeclarationOnly",
+    "types:check": "vue-tsc --noEmit",
+    "types:generate": "vue-tsc --emitDeclarationOnly",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "dependencies": {
+    "@vueuse/core": "^10.7.2",
+    "vue": "^3.4.15"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.6.4",
+    "@types/node": "^20.11.0",
+    "@vitejs/plugin-vue": "^5.0.3",
+    "@vue/tsconfig": "^0.5.1",
+    "eslint": "npm:eslint-ts-patch@8.56.0-0",
+    "eslint-ts-patch": "8.56.0-0",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.12",
+    "vue-tsc": "^1.8.27"
+  }
+}
