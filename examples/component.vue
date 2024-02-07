@@ -13,8 +13,8 @@
 import { computed } from 'vue';
 import { useFetch } from '@vueuse/core';
 import type { PlaidLinkOnExit } from '../src/types';
-import type { PlaidLinkOnEvent, PlaidLinkOnSuccess } from './plaid/types';
-import PlaidLink from '@/plaid/PlaidLink.vue';
+import type { PlaidLinkOnEvent, PlaidLinkOnSuccess } from '@jcss/vue-plaid-link';
+import { PlaidLink } from '@jcss/vue-plaid-link';
 
 const onSuccess: PlaidLinkOnSuccess = (publicToken, metadata) => {
   // send public_token to your server

@@ -87,8 +87,8 @@ If you cannot use Vue composables for some reason, you can use the `PlaidLink` c
 </template>
 
 <script lang="ts" setup>
-import type { PlaidLinkOnEvent, PlaidLinkOnSuccess } from './plaid/types';
-import PlaidLink from '@/plaid/PlaidLink.vue';
+import type { PlaidLinkOnEvent, PlaidLinkOnSuccess } from '@jcss/vue-plaid-link';
+import PlaidLink from '@jcss/vue-plaid-link';
 
 // ...
 </script>
