@@ -4,7 +4,7 @@
     "@vue/tsconfig/tsconfig.lib.json"
   ],
   "compilerOptions": {
-    "outDir": "dist"
+    "declarationDir": "dist/types"
   },
   "include": ["src"],
   "exclude": ["examples"]

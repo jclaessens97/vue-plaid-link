@@ -7,17 +7,25 @@
   "license": "MIT",
   "exports": {
     ".": {
-      "import": "./dist/jcss-vue-plaid-link.js",
-      "require": "./dist/jcss-vue-plaid-link.umd.cjs"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/jcss-vue-plaid-link.js"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/jcss-vue-plaid-link.umd.cjs"
+      }
     }
   },
+  "main": "./dist/jcss-vue-plaid-link.umd.cjs",
+  "module": "./dist/jcss-vue-plaid-link.js",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
     "dev": "vite",
-    "build": "vite build && vue-tsc --emitDeclarationOnly",
+    "build": "rimraf dist && vite build && vue-tsc --emitDeclarationOnly ",
     "types:check": "vue-tsc --noEmit",
     "types:generate": "vue-tsc --emitDeclarationOnly",
     "lint": "eslint .",
@@ -34,8 +42,10 @@
     "@vue/tsconfig": "^0.5.1",
     "eslint": "npm:eslint-ts-patch@8.56.0-0",
     "eslint-ts-patch": "8.56.0-0",
+    "rimraf": "^5.0.5",
     "typescript": "^5.3.3",
     "vite": "^5.0.12",
+    "vite-plugin-dts": "^3.7.2",
     "vue-tsc": "^1.8.27"
   }
 }
