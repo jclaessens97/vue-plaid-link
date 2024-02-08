@@ -70,7 +70,7 @@ export default function usePlaidLink(options: Ref<PlaidLinkOptions>) {
 
   return {
     ready,
-    exit: toRaw(exit),
-    open: toRaw(open),
+    open: open.value,
+    exit: exit.value,
   };
 }
