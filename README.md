@@ -2,7 +2,7 @@
 
 [Vue](https://vuejs.org/) component for integrating with [Plaid Link](https://plaid.com/docs/link/)
 
-This is an unnoficial Vue fork based on the official React version [react-plaid-link](https://github.com/plaid/react-plaid-link).
+This is an unofficial Vue fork based on the official React version [react-plaid-link](https://github.com/plaid/react-plaid-link).
 
 ### Compatibility
 
