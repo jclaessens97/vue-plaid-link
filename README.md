@@ -125,6 +125,7 @@ import PlaidLink from '@jcss/vue-plaid-link';
 
 ## Notes
 
-I don't have a lot of spare time to actively maintain this project. I could only put this package up so Plaid can refer to it: https://github.com/plaid/react-plaid-link/issues/330 since I implemented it for a side-project of mine.
+I don't have a lot of spare time to actively maintain this project. I only put this package up so Plaid can refer to it: https://github.com/plaid/react-plaid-link/issues/330 since I implemented it for a side-project of mine.
 
-Currently only the regular, [non-deprecated](https://plaid.com/docs/link/link-token-migration-guide/) flow is implemented, without web3 and without oauth support. Feel free to open PR's to add this. I might add it myself if I see the need in my own side-project.
+Currently only the regular, [non-deprecated](https://plaid.com/docs/link/link-token-migration-guide/) flow is implemented.
+Feel free to open PR's.
