@@ -1,5 +1,5 @@
 import type { Ref } from 'vue';
-import { computed, ref, toRaw, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useScriptTag } from '@vueuse/core';
 import { PLAID_LINK_STABLE_URL } from './constants';
 import { PlaidSDKError } from './types/error';
