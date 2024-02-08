@@ -1,4 +1,4 @@
-# @jcss/vue-plaid-link
+# @jcss/vue-plaid-link [![npm version](https://badge.fury.io/js/@jcss%2Fvue-plaid-link.svg)](https://badge.fury.io/js/@jcss%2Fvue-plaid-link)
 
 [Vue](https://vuejs.org/) component for integrating with [Plaid Link](https://plaid.com/docs/link/)
 
