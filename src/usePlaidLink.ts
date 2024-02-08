@@ -35,6 +35,10 @@ export default function usePlaidLink(options: Ref<PlaidLinkOptions>) {
         return;
       }
 
+      if (!options.value.token && !options.value.receivedRedirectUri) {
+        return;
+      }
+
       if (!window.Plaid) {
         throw new PlaidSDKError();
       }
