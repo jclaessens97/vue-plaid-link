@@ -40,6 +40,35 @@ See the [examples folder](examples) for various complete source code examples.
 
 This is the preferred approach for integrating with Plaid Link in Vue.
 
+**Note:** `token` can be `null` initially and then set once you fetch or generate
+a `link_token` asynchronously.
+
+ℹ️ See a full source code examples of using composables:
+
+- [examples/simple.vue](examples/simple.vue): minimal example of using composables
+- [examples/composable.vue](examples/composable.vue): example using composable with all
+  available callbacks
+- [examples/oauth.tsx](examples/oauth.vue): example handling OAuth with composable
+
+```vue
+<template>
+  <button :disabled="!ready" @click="open">
+    Connect a bank account
+  </button>
+</template>
+
+<script lang="ts" setup>
+import { usePlaidLink } from '@jcss/vue-plaid-link';
+
+const { open, ready } = usePlaidLink({
+  token: '<GENERATED_LINK_TOKEN>',
+  onSuccess: (public_token, metadata) => {
+    // send public_token to server
+  },
+});
+</script>
+```
+
 ### Available Link configuration options
 
 ℹ️ See (src/types/index.ts)[https://github.com/jclaessens97/vue-plaid-link/blob/c9e45fead47649c16c5ca9ca74bd22bee1ccabd9/src/types/index.ts] for exported types.

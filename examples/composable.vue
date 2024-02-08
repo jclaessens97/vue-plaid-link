@@ -1,20 +1,20 @@
 <template>
-  <PlaidLink
-    :token="token"
-    :on-success="onSuccess"
-    :on-event="onEvent"
-    :on-exit="onExit"
-  >
-    Connect a wallet
-  </PlaidLink>
+  <button :disabled="!ready" @click="open">
+    Connect a bank account
+  </button>
 </template>
 
 <script lang="ts" setup>
 import { computed } from 'vue';
 import { useFetch } from '@vueuse/core';
-import type { PlaidLinkOnExit } from '../src/types';
-import type { PlaidLinkOnEvent, PlaidLinkOnSuccess } from '@jcss/vue-plaid-link';
-import { PlaidLink } from '@jcss/vue-plaid-link';
+import type { PlaidLinkOnEvent, PlaidLinkOnExit, PlaidLinkOnSuccess, PlaidLinkOptions } from '@jcss/vue-plaid-link';
+import { usePlaidLink } from '@jcss/vue-plaid-link';
+
+const { data } = useFetch<{ link_token: string }>('/api/create_link_token', { method: 'POST' });
+const token = computed(() => {
+  if (!data.value) { return ''; }
+  return data.value.link_token;
+});
 
 const onSuccess: PlaidLinkOnSuccess = (publicToken, metadata) => {
   // send public_token to your server
@@ -34,9 +34,15 @@ const onExit: PlaidLinkOnExit = (error, metadata) => {
   console.log(error, metadata);
 };
 
-const { data } = useFetch<{ link_token: string }>('/api/create_link_token', { method: 'POST' });
-const token = computed(() => {
-  if (!data.value) { return ''; }
-  return data.value.link_token;
+const config = computed(() => {
+  const config: PlaidLinkOptions = {
+    token: token.value,
+    onSuccess,
+    onEvent,
+    onExit,
+  };
+  return config;
 });
+
+const { open, ready } = usePlaidLink(config);
 </script>
