@@ -10,6 +10,7 @@ function noop() {}
 
 function loadPlaidSdk() {
   const isPlaidLoading = ref(true);
+  const error = ref<Error | null>(null);
 
   const { load } = useScriptTag(
     PLAID_LINK_STABLE_URL,
@@ -18,12 +19,12 @@ function loadPlaidSdk() {
     },
   );
 
-  load();
-  return { isPlaidLoading };
+  load().catch((err) => { error.value = err; }); ;
+  return { isPlaidLoading, error };
 }
 
 export default function usePlaidLink(options: Ref<PlaidLinkOptions>) {
-  const { isPlaidLoading } = loadPlaidSdk();
+  const { isPlaidLoading, error } = loadPlaidSdk();
 
   const plaid = ref<PlaidFactory | null>(null);
   const iframeLoaded = ref(false);
@@ -59,17 +60,18 @@ export default function usePlaidLink(options: Ref<PlaidLinkOptions>) {
 
       return () => next.exit({ force: true }, () => next.destroy());
     },
+    {
+      immediate: true,
+    },
   );
 
-  const ready = computed(() => {
-    return plaid.value != null && (!isPlaidLoading.value || iframeLoaded.value);
-  });
-
+  const ready = computed(() => !error.value && plaid.value != null && (!isPlaidLoading.value || iframeLoaded.value));
   const exit = computed(() => plaid.value ? plaid.value.exit : noop);
   const open = computed(() => plaid.value ? plaid.value.open : noop);
 
   return {
     ready,
+    error,
     open: open.value,
     exit: exit.value,
   };

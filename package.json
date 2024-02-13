@@ -29,7 +29,8 @@
     "types:check": "vue-tsc --noEmit",
     "types:generate": "vue-tsc --emitDeclarationOnly",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "test": "vitest"
   },
   "dependencies": {
     "@vueuse/core": "^10.7.2",
@@ -39,12 +40,15 @@
     "@antfu/eslint-config": "^2.6.4",
     "@types/node": "^20.11.0",
     "@vitejs/plugin-vue": "^5.0.3",
+    "@vue/test-utils": "^2.4.4",
     "@vue/tsconfig": "^0.5.1",
     "eslint": "npm:eslint-ts-patch@8.56.0-0",
     "eslint-ts-patch": "8.56.0-0",
+    "happy-dom": "^13.3.8",
     "rimraf": "^5.0.5",
     "typescript": "^5.3.3",
     "vite": "^5.0.12",
+    "vitest": "^1.2.2",
     "vue-tsc": "^1.8.27"
   }
 }
