@@ -71,7 +71,7 @@ const { open, ready } = usePlaidLink({
 
 ### Available Link configuration options
 
-ℹ️ See (src/types/index.ts)[https://github.com/jclaessens97/vue-plaid-link/blob/c9e45fead47649c16c5ca9ca74bd22bee1ccabd9/src/types/index.ts] for exported types.
+ℹ️ See [src/types/index.ts](https://github.com/jclaessens97/vue-plaid-link/blob/c9e45fead47649c16c5ca9ca74bd22bee1ccabd9/src/types/index.ts) for exported types.
 
 Please refer to the [official Plaid Link
 docs](https://plaid.com/docs/link/web/) for a more holistic understanding of
@@ -122,10 +122,3 @@ import PlaidLink from '@jcss/vue-plaid-link';
 // ...
 </script>
 ```
-
-## Notes
-
-I don't have a lot of spare time to actively maintain this project. I only put this package up so Plaid can refer to it: https://github.com/plaid/react-plaid-link/issues/330 since I implemented it for a side-project of mine.
-
-Currently only the regular, [non-deprecated](https://plaid.com/docs/link/link-token-migration-guide/) flow is implemented.
-Feel free to open PR's.
