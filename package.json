@@ -34,12 +34,12 @@
   },
   "dependencies": {
     "@vueuse/core": "^10.7.2",
-    "vue": "^3.4.15"
+    "vue": "^3.4.19"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.6.4",
-    "@types/node": "^20.11.0",
-    "@vitejs/plugin-vue": "^5.0.3",
+    "@types/node": "^20.11.17",
+    "@vitejs/plugin-vue": "^5.0.4",
     "@vue/test-utils": "^2.4.4",
     "@vue/tsconfig": "^0.5.1",
     "eslint": "npm:eslint-ts-patch@8.56.0-0",
@@ -47,7 +47,7 @@
     "happy-dom": "^13.3.8",
     "rimraf": "^5.0.5",
     "typescript": "^5.3.3",
-    "vite": "^5.0.12",
+    "vite": "^5.1.1",
     "vitest": "^1.2.2",
     "vue-tsc": "^1.8.27"
   }
