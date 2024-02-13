@@ -19,7 +19,9 @@ function loadPlaidSdk() {
     },
   );
 
-  load().catch((err) => { error.value = err; }); ;
+  load().catch((err) => {
+    error.value = err;
+  }); ;
   return { isPlaidLoading, error };
 }
 
