@@ -48,7 +48,7 @@ a `link_token` asynchronously.
 - [examples/simple.vue](examples/simple.vue): minimal example of using composables
 - [examples/composable.vue](examples/composable.vue): example using composable with all
   available callbacks
-- [examples/oauth.tsx](examples/oauth.vue): example handling OAuth with composable
+- [examples/oauth.vue](examples/oauth.vue): example handling OAuth with composable
 
 ```vue
 <template>
