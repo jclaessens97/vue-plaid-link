@@ -6,7 +6,7 @@ import { PlaidSDKError } from './types/error';
 import { type PlaidFactory, createPlaid } from './factory';
 import type { PlaidLinkOptions } from './types';
 
-function noop() {}
+// function noop() {}
 
 function loadPlaidSdk() {
   const isPlaidLoading = ref(true);
@@ -68,13 +68,21 @@ export default function usePlaidLink(options: Ref<PlaidLinkOptions>) {
   );
 
   const ready = computed(() => !error.value && plaid.value != null && (!isPlaidLoading.value || iframeLoaded.value));
-  const exit = computed(() => plaid.value ? plaid.value.exit : noop);
-  const open = computed(() => plaid.value ? plaid.value.open : noop);
+  // const exit = computed(() => plaid.value ? plaid.value.exit : noop);
+  // const open = computed(() => plaid.value ? plaid.value.open : noop);
 
   return {
     ready,
     error,
-    open: open.value,
-    exit: exit.value,
+    open: () => {
+      if (plaid.value) {
+        plaid.value.open();
+      }
+    },
+    exit: (exitOptions: any, callback: () => void) => {
+      if (plaid.value) {
+        plaid.value.exit(exitOptions, callback);
+      }
+    },
   };
 }
