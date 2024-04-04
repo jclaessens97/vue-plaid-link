@@ -1,7 +1,7 @@
 {
   "name": "@jcss/vue-plaid-link",
   "type": "module",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Vue component for Plaid Link",
   "author": "Jeroen Claessens <jeroen.claessens@jcss.be>",
   "license": "MIT",
