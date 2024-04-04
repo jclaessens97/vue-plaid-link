@@ -1,9 +1,9 @@
 import { PlaidSDKError } from './types/error';
-import type { PlaidHandler, PlaidLinkOptions } from './types';
+import type { PlaidExitOptions, PlaidHandler, PlaidLinkOptions } from './types';
 
 export interface PlaidFactory {
   open: () => void;
-  exit: (exitOptions: any, callback: () => void) => void;
+  exit: (exitOptions: PlaidExitOptions, callback: () => void) => void;
   destroy: () => void;
 }
 
@@ -42,7 +42,7 @@ function createPlaidHandler(config: PlaidLinkOptions, creator: (config: PlaidLin
     state.plaid?.open();
   };
 
-  const exit = (exitOptions: any, callback: (() => void)) => {
+  const exit = (exitOptions: PlaidExitOptions, callback: (() => void)) => {
     if (!state.open || !state.plaid) {
       callback && callback();
       return;

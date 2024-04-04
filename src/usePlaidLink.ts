@@ -4,7 +4,7 @@ import { useScriptTag } from '@vueuse/core';
 import { PLAID_LINK_STABLE_URL } from './constants';
 import { PlaidSDKError } from './types/error';
 import { type PlaidFactory, createPlaid } from './factory';
-import type { PlaidLinkOptions } from './types';
+import type { PlaidExitOptions, PlaidLinkOptions } from './types';
 
 function loadPlaidSdk() {
   const isPlaidLoading = ref(true);
@@ -75,7 +75,7 @@ export default function usePlaidLink(options: Ref<PlaidLinkOptions>) {
         plaid.value.open();
       }
     },
-    exit: (exitOptions: any, callback: () => void) => {
+    exit: (exitOptions: PlaidExitOptions, callback: () => void) => {
       if (plaid.value) {
         plaid.value.exit(exitOptions, callback);
       }

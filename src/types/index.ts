@@ -31,6 +31,10 @@ export interface PlaidLinkOptions {
   onLoad?: () => void;
   onEvent?: PlaidLinkOnEvent;
 }
+
+export interface PlaidExitOptions {
+  force?: boolean;
+}
 // #endregion
 
 // #region Callbacks
@@ -72,7 +76,7 @@ export type PlaidLinkOnEvent = (eventName: PlaidEventName, metadata: PlaidLinkOn
 // #region Global Plaid
 export interface PlaidHandler {
   open: () => void;
-  exit: (force?: boolean) => void;
+  exit: (options?: PlaidExitOptions) => void;
   destroy: () => void;
 }
 
