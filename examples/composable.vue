@@ -10,7 +10,7 @@ import { useFetch } from '@vueuse/core';
 import type { PlaidLinkOnEvent, PlaidLinkOnExit, PlaidLinkOnSuccess, PlaidLinkOptions } from '@jcss/vue-plaid-link';
 import { usePlaidLink } from '@jcss/vue-plaid-link';
 
-const { data } = useFetch<{ link_token: string }>('/api/create_link_token', { method: 'POST' });
+const { data } = useFetch<{ link_token: string }>('/api/create_link_token', { method: 'POST' }).json();
 const token = computed(() => {
   if (!data.value) { return ''; }
   return data.value.link_token;
