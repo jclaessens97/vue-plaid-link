@@ -11,6 +11,7 @@ interface FactoryInternalState {
   plaid: PlaidHandler | null;
   open: boolean;
   onExitCallback: (() => void) | null | Function;
+  destroyed: boolean;
 }
 
 function createPlaidHandler(config: PlaidLinkOptions, creator: (config: PlaidLinkOptions) => PlaidHandler) {
@@ -18,6 +19,7 @@ function createPlaidHandler(config: PlaidLinkOptions, creator: (config: PlaidLin
     plaid: null,
     open: false,
     onExitCallback: null,
+    destroyed: false,
   };
 
   if (typeof window === 'undefined' || !window.Plaid) {
@@ -26,11 +28,36 @@ function createPlaidHandler(config: PlaidLinkOptions, creator: (config: PlaidLin
 
   state.plaid = creator({
     ...config,
+    onSuccess: (public_token, metadata) => {
+      if (state.destroyed) {
+        return;
+      }
+      config.onSuccess(public_token, metadata);
+    },
     onExit: (err, metadata) => {
+      if (state.destroyed) {
+        return;
+      }
       state.open = false;
       config.onExit && config.onExit(err, metadata);
       state.onExitCallback && state.onExitCallback();
     },
+    onEvent: config.onEvent
+      ? (eventName, metadata) => {
+          if (state.destroyed) {
+            return;
+          }
+          config.onEvent!(eventName, metadata);
+        }
+      : undefined,
+    onLoad: config.onLoad
+      ? () => {
+          if (state.destroyed) {
+            return;
+          }
+          config.onLoad!();
+        }
+      : undefined,
   });
 
   const open = () => {
@@ -58,6 +85,7 @@ function createPlaidHandler(config: PlaidLinkOptions, creator: (config: PlaidLin
     if (!state.plaid) {
       return;
     }
+    state.destroyed = true;
     state.plaid.destroy();
     state.plaid = null;
   };
