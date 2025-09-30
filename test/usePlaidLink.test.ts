@@ -33,17 +33,21 @@ describe('usePlaidLink', () => {
     onSuccess: vi.fn(),
   };
 
+  const registeredCallbacks: Array<PlaidLinkOptions> = [];
+  const destroyMock = vi.fn();
+
   beforeAll(() => {
     expect(PlaidLinkTest).toBeTruthy();
 
     vi.stubGlobal('Plaid', {
-      create: ({ onLoad }) => {
-        onLoad && onLoad();
+      create: (config: PlaidLinkOptions) => {
+        registeredCallbacks.push(config);
+        config.onLoad && config.onLoad();
         return {
           create: vi.fn(),
           open: vi.fn(),
           exit: vi.fn(),
-          destroy: vi.fn(),
+          destroy: destroyMock,
         };
       },
       open: vi.fn(),
@@ -179,5 +183,61 @@ describe('usePlaidLink', () => {
 
     expect(wrapper.get('#ready').text()).toBe(ReadyState.READY);
     expect(wrapper.get('#error').text()).toBe(ReadyState.NO_ERROR);
+  });
+
+  it('should not call old onSuccess handler after component remount', async () => {
+    const firstOnSuccess = vi.fn();
+    const secondOnSuccess = vi.fn();
+
+    registeredCallbacks.length = 0;
+    destroyMock.mockClear();
+
+    const firstConfig: PlaidLinkOptions = {
+      token: 'test-token-1',
+      onSuccess: firstOnSuccess,
+    };
+
+    const wrapper = mount(PlaidLinkTest, {
+      props: {
+        config: firstConfig,
+      },
+    });
+
+    vi.advanceTimersByTime(3000);
+    await flushPromises();
+
+    expect(wrapper.get('#ready').text()).toBe(ReadyState.READY);
+    expect(registeredCallbacks.length).toBe(1);
+
+    wrapper.unmount();
+    await nextTick();
+
+    const secondConfig: PlaidLinkOptions = {
+      token: 'test-token-2',
+      onSuccess: secondOnSuccess,
+    };
+
+    const wrapper2 = mount(PlaidLinkTest, {
+      props: {
+        config: secondConfig,
+      },
+    });
+
+    vi.advanceTimersByTime(3000);
+    await flushPromises();
+
+    expect(wrapper2.get('#ready').text()).toBe(ReadyState.READY);
+    expect(registeredCallbacks.length).toBe(2);
+
+    registeredCallbacks.forEach((cb) => {
+      cb.onSuccess('test-public-token', {
+        institution: null,
+        accounts: [],
+        link_session_id: 'test-session-id',
+      });
+    });
+
+    expect(firstOnSuccess).not.toHaveBeenCalled();
+    expect(secondOnSuccess).toHaveBeenCalledTimes(1);
   });
 });

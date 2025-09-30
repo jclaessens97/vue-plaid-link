@@ -1,5 +1,5 @@
 import type { Ref } from 'vue';
-import { computed, ref, watch } from 'vue';
+import { computed, onScopeDispose, ref, watch } from 'vue';
 import { useScriptTag } from '@vueuse/core';
 import { PLAID_LINK_STABLE_URL } from './constants';
 import { PlaidSDKError } from './types/error';
@@ -66,6 +66,13 @@ export default function usePlaidLink(options: Ref<PlaidLinkOptions>) {
   );
 
   const ready = computed(() => !error.value && plaid.value != null && (!isPlaidLoading.value || iframeLoaded.value));
+
+  onScopeDispose(() => {
+    const instance = plaid.value;
+    if (instance) {
+      instance.exit({ force: true }, () => instance.destroy());
+    }
+  });
 
   return {
     ready,
